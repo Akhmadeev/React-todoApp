@@ -1,14 +1,13 @@
 import Task from '../task';
 
 
-const TaskList = ({todos}) => {
+const TaskList = ({todos, oneDeleted}) => {
 
   const elements = todos.map(item => {
 
     return (
-      <li className='completed' key={item.id}>
-        <Task label={item.label} timeOut={item.timeOut}></Task>
-      </li>
+      <Task label={item.label} timeOut={item.timeOut} key={item.id} 
+      oneDeleted={() => oneDeleted(item.id)}></Task>
     );
   });
 
