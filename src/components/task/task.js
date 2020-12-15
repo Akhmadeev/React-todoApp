@@ -16,21 +16,21 @@ import React, {Component} from 'react';
 
 export default class Task extends Component {
 
-  state = {
-    done: false
-  }
+  // state = {
+  //   done: false
+  // }
 
-  oneLabelClick = () => {
-    this.setState((state) => {
-      return {
-        done: !state.done
-      }
-    })
-  }
+  // oneLabelClick = () => {
+  //   this.setState((state) => {
+  //     return {
+  //       done: !state.done
+  //     }
+  //   })
+  // }
 
   render() {
-    const {label, timeOut, id, oneDeleted} = this.props;
-    const { done } = this.state;
+    const {label, timeOut, id, oneDeleted, onToggleImportant, onToggleDone, done} = this.props;
+
 
     let className = 'todo-list-item';
     if(done) {
@@ -39,7 +39,7 @@ export default class Task extends Component {
     return (
       <li className={className} key={id}>
         <div className='view'>
-          <input className='toggle' type="checkbox" onClick={this.oneLabelClick}></input>
+          <input className='toggle' type="checkbox" onClick={onToggleDone}></input>
           <label>
             <span className='description'
             >{label}</span>
@@ -49,7 +49,7 @@ export default class Task extends Component {
           <button className="icon icon-destroy"
                   onClick={oneDeleted}></button>
         </div>
-        </li>
+      </li>
     )
   }
 };
