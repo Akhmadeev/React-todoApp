@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import TasksFilter from '../task-filter/'
+import TasksFilter from '../task-filter/';
 export default class Footer extends Component  {
 
   render() {
-
-
     const {doneCount, allDelet, newAllList, newActiveList, newCompletedList} = this.props;
 
     return (

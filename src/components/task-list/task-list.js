@@ -1,7 +1,10 @@
+import React, {Component} from 'react';
 import Task from '../task';
 
+export default class TaskList extends Component  {
 
-const TaskList = ({todos, oneDeleted, onToggleImportant, onToggleDone, done}) => {
+ render() {
+  const {todos, oneDeleted, onToggleImportant, onToggleDone, done} = this.props;
 
   const elements = todos.map(item => {
 
@@ -13,7 +16,6 @@ const TaskList = ({todos, oneDeleted, onToggleImportant, onToggleDone, done}) =>
       done={item.done}></Task>
     )
   });
-
   return (
     <section className='main'>
       <ul className='todo-list'>
@@ -21,6 +23,5 @@ const TaskList = ({todos, oneDeleted, onToggleImportant, onToggleDone, done}) =>
       </ul>
     </section>
   );
+ }
 };
-
-export default TaskList;
