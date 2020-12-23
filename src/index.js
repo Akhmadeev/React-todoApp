@@ -1,16 +1,14 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import Task from './components/task/';
-import Footer from './components/footer/';
-import TaskList from './components/task-list';
-import NewTaskForm from './components/new-task-form';
-import TasksFilter from './components/task-filter';
-import { formatRelative, subDays } from 'date-fns'
-import './index.css';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import Footer from "./components/footer/footer";
+import TaskList from "./components/task-list/task-list";
+import NewTaskForm from "./components/new-task-form/new-task-form";
 
 export default class App extends Component {
 
   maxId = 1;
+
   time = 13;
 
   state = {
@@ -19,7 +17,7 @@ export default class App extends Component {
       this.createTodoItem('Editing task'),
       this.createTodoItem('Active task'),
     ], 
-    todo: []
+    filter: 'all',
   };
 
   deleteItem = (id) => {
@@ -41,18 +39,9 @@ export default class App extends Component {
        todoItem: idx,
        todo: idx
      };
-    })
+    });
   };
 
-  createTodoItem(label) {
-    return {
-      label,
-      timeOut: formatRelative(subDays(new Date(), 3), new Date()),
-      done: false,
-      important: false,
-      id: this.maxId++,
-    }
-  };
 
   addItem = (text) => {
  
@@ -71,89 +60,122 @@ export default class App extends Component {
 
   };
 
-  toggleProperty(arr, id, propName) {
-  
-      const idx = arr.findIndex(el => el.id === id);
-      const oldItem = arr[idx];
-      const newItem = {...oldItem, [propName]: !oldItem[propName]};
-      
-      return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
-  }
-
   onToggleImportant = (id) => {
-    this.setState(({todoItem}) => {
-      return {
+    this.setState(({todoItem}) => ({
         todoItem: this.toggleProperty(todoItem, id, 'important')
-      };
-    });
-  }
+      }));
+  };
 
   onToggleDone = (id) => {
-    this.setState(({todoItem}) => {
-      return {
+    this.setState(({todoItem}) => ({
         todoItem: this.toggleProperty(todoItem, id, 'done')
-      };
-    });
-  }
+      }));
+  };
 
   
-  newAllList = () => {
-    this.setState(({todoItem}) => {
-      return {
-        todo: todoItem
-      }
-    })
-  }
+  // newAllList = () => {
+  //   this.setState(({todoItem}) => {
+  //     return {
+  //       todo: todoItem
+  //     };
+  //   });
+  // };
 
-  newActiveList = () => {
-    this.setState(({todoItem}) => {
-      const idx = todoItem.filter(el => !el.done);
-      console.log(idx)
-      return {
-        todo: idx
-      };
-     })
-  }
+  // newActiveList = () => {
+  //   this.setState(({todoItem}) => {
+  //     const idx = todoItem.filter(el => !el.done);
+  //     console.log(idx)
+  //     return {
+  //       todo: idx
+  //     };
+  //    });
+  // };
 
-  newCompletedList = () => {
-    this.setState(({todoItem}) => {
-      const idx = todoItem.filter(el => el.done);
+  // newCompletedList = () => {
+  //   this.setState(({todoItem}) => {
+  //     const idx = todoItem.filter(el => el.done);
      
-      return {
-        todo: idx
-      };
-     })
+  //     return {
+  //       todo: idx
+  //     };
+  //    });
+  // };
+
+
+  onFilterChange = (filter) => {
+    this.setState({filter});
   }
+
+  filter(items, filter) {
+    switch(filter) {
+      case 'all': 
+        return items;
+      case 'active': 
+        return items.filter((item) => !item.done);
+      case 'done': 
+        return items.filter((item) => item.done);
+      default: 
+        return items;
+    }
+  }
+
+  toggleProperty(arr, id, propName) {
   
+    const idx = arr.findIndex(el => el.id === id);
+    const oldItem = arr[idx];
+    const newItem = {...oldItem, [propName]: !oldItem[propName]};
+    
+    return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
+};
+
+
+  createTodoItem(label) {
+    return {
+      label,
+      timeOut: new Date(),
+      done: false,
+      important: false,
+      id: this.maxId + 1,
+    }
+  };
+
   render() {
-    const {todoItem} = this.state;
-    const {todo} = this.state;
+    const {todoItem, filter} = this.state;
+    const visibleItems = this.filter(todoItem, filter);
+    // const {todo} = this.state;
     const doneCount = todoItem.filter((el) => !el.done).length;
     // const finallyTodo = (todo, todoItem) => {
     //   if(todo == []) return todoItem
     //   return todo
     // }
-    //const importantCount = todoItem.length - doneCount;
+    // const importantCount = todoItem.length - doneCount;
 
     return (
       <div className='todoapp'>
-        <NewTaskForm addItem={this.addItem}></NewTaskForm>
-        <TaskList todos={todo} 
-                  oneDeleted={this.deleteItem}
-                  onToggleImportant={this.onToggleImportant}
-                  onToggleDone={this.onToggleDone}
-        ></TaskList>
-        <Footer doneCount={doneCount} 
-                allDelet={this.allDelet} 
-                newAllList={this.newAllList}
-                newActiveList={this.newActiveList}
-                newCompletedList={this.newCompletedList}></Footer>
+        <NewTaskForm addItem={ this.addItem } />
+        <TaskList todos={ visibleItems } 
+                  oneDeleted={ this.deleteItem }
+                  onToggleImportant={ this.onToggleImportant }
+                  onToggleDone={ this.onToggleDone }
+         />
+        <Footer doneCount={ doneCount } 
+                allDelet={ this.allDelet } 
+                // newAllList={this.newAllList}
+                // newActiveList={this.newActiveList}
+                // newCompletedList={this.newCompletedList}
+
+                filter={ this.filter }
+                onFilterChange={ this.onFilterChange } />
       </div>
     );
-  } 
+  };
 };
 
-ReactDOM.render(<App></App>, document.getElementById('root'));
+App.defaultProps = {
+  maxId: 100
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
 
 // Task - одна задача
 // TaskList - список задач

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-
+import React, { Component } from "react";
+import PropTypes from 'prop-types';
 
 export default class NewTaskForm extends Component {
 
@@ -7,31 +7,46 @@ export default class NewTaskForm extends Component {
     label: '',
   }
 
-  onLavelChange = (e) => {
+  static defaultProps = {
+    addItem: () => {}
+  };
 
+  static propTypes = {
+    addItem: PropTypes.func
+  }
+
+  onLavelChange = (event) => {
     this.setState({
-      label: e.target.value
+      label: event.target.value
     })
   };
 
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    if(this.state.label) this.props.addItem(this.state.label);
-    else this.props.addItem('(no name)')
+  onSubmit = (event) => {
+
+    const { label} = this.state; 
+
+    const {addItem} = this.props;
+
+    event.preventDefault();
+    if(label) addItem(label);
+    else addItem('(no name)')
     this.setState({
       label: ''
     })
   }
 
   render() {
+
+    const { label} = this.state; 
+    
     return (
       <header className="header">
         <form onSubmit={this.onSubmit}>
           <h1>todos</h1>
           <input className="new-todo" placeholder="What needs to be done?" 
           onChange={this.onLavelChange}
-          value={this.state.label}></input>
+          value={label} />
         </form>
       </header>
     )
