@@ -9,7 +9,7 @@ const Task = ({ label, timeOut, oneDeleted, onToggleDone, done }) => {
     let className = 'todo-list-item';
     if(done) className += ' completed';
 
-    console.log(`${label} : ${done}`)
+    // console.log(`${label} : ${done}`)
 
     return (
       <li className={ className } >
