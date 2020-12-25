@@ -46,11 +46,11 @@ export default class TasksFilter extends Component {
 };
 
 TasksFilter.defaultProps = {
-  filter: '',
+  filter: () => {},
   onFilterChange: () => {}
 }
 
 TasksFilter.propTypes = {
-  filter: PropTypes.string,
+  filter: PropTypes.func,
   onFilterChange: PropTypes.func
 }

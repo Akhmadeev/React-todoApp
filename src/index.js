@@ -54,7 +54,7 @@ export default class App extends Component {
       ];
       return {
         todoItem: newArr,
-        todo:newArr
+        todo: newArr
       };
     });
 
@@ -72,7 +72,6 @@ export default class App extends Component {
       }));
   };
 
-  
   // newAllList = () => {
   //   this.setState(({todoItem}) => {
   //     return {
@@ -100,7 +99,6 @@ export default class App extends Component {
   //     };
   //    });
   // };
-
 
   onFilterChange = (filter) => {
     this.setState({filter});
@@ -130,12 +128,13 @@ export default class App extends Component {
 
 
   createTodoItem(label) {
+    this.maxId += 1
     return {
       label,
       timeOut: new Date(),
+      id: this.maxId,
       done: false,
       important: false,
-      id: this.maxId + 1,
     }
   };
 
