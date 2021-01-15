@@ -64,11 +64,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Akhmadeev/React-todoApp/issues"
-  },
-  "husky": {    
-    "hooks": {      
-      "pre-commit": "YOUR_COMMAND_HERE", 
-      "pre-push": "YOUR_COMMAND_HERE"   
-    }  
- }
+  }
 }
