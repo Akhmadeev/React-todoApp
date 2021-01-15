@@ -15,7 +15,7 @@ export default class NewTaskForm extends Component {
     addItem: PropTypes.func
   }
 
-  onLavelChange = (event) => {
+  onLabelChange = (event) => {
     this.setState({
       label: event.target.value
     })
@@ -30,7 +30,6 @@ export default class NewTaskForm extends Component {
 
     event.preventDefault();
     if(label) addItem(label);
-    else addItem('(no name)')
     this.setState({
       label: ''
     })
@@ -44,8 +43,8 @@ export default class NewTaskForm extends Component {
       <header className="header">
         <form onSubmit={this.onSubmit}>
           <h1>todos</h1>
-          <input className="new-todo" placeholder="What needs to be done?" 
-          onChange={this.onLavelChange}
+          <input className="new-todo" required placeholder="What needs to be done?" 
+          onChange={this.onLabelChange}
           value={label} />
         </form>
       </header>

@@ -10,7 +10,7 @@ const TaskList = ({todos, oneDeleted, onToggleImportant, onToggleDone}) => {
   // else todoItem = todos;
 
   const elements = todos.map(item => (
-      <Task label={ item.label } timeOut={ item.timeOut } key={ Math.random() } 
+      <Task label={ item.label } timeOut={ item.timeOut } key={ item.id } 
       oneDeleted={ () => oneDeleted(item.id)}
       onToggleImportant={ () => onToggleImportant(item.id) }
       onToggleDone={ () => onToggleDone(item.id) }
