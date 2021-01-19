@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Task from '../task';
 
-const TaskList = ({todos, oneDeleted, onToggleImportant, onToggleDone}) => {
+const TaskList = ({todos, oneDeleted, onToggleImportant, onToggleDone, editItem}) => {
 
 
   // let todoItem;
@@ -11,9 +11,11 @@ const TaskList = ({todos, oneDeleted, onToggleImportant, onToggleDone}) => {
 
   const elements = todos.map(item => (
       <Task label={ item.label } timeOut={ item.timeOut } key={ item.id } 
+      important={item.important}
       oneDeleted={ () => oneDeleted(item.id)}
       onToggleImportant={ () => onToggleImportant(item.id) }
       onToggleDone={ () => onToggleDone(item.id) }
+      editItem={ () => {editItem(item.id)}}
       done={ item.done } />
     ));
  
@@ -31,6 +33,7 @@ TaskList.defaultProps = {
   oneDeleted: () => {},
   onToggleImportant: () => {},
   onToggleDone: () => {},
+  editItem: () => {}
 };
 
 TaskList.propTypes = {
@@ -41,6 +44,7 @@ TaskList.propTypes = {
   oneDeleted: PropTypes.func,
   onToggleImportant: PropTypes.func,
   onToggleDone: PropTypes.func,
+  editItem: PropTypes.func,
 };
 
 export default TaskList;

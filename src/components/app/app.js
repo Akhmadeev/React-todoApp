@@ -19,7 +19,6 @@ export default class App extends Component {
 
   deleteItem = (id) => {
     this.setState(({todoItem}) => {
-
       const idx = todoItem.findIndex(el => el.id === id);
       const newArray = [...todoItem.slice(0, idx), ...todoItem.slice(idx + 1)];
         return {
@@ -37,12 +36,10 @@ export default class App extends Component {
     });
   };
 
-
   addItem = (text) => {
  
     const newItem = this.createTodoItem(text);
     this.setState(({todoItem}) => {
-
       const newArr = [
         ...todoItem,
         newItem
@@ -51,8 +48,12 @@ export default class App extends Component {
         todoItem: newArr
       };
     });
-
   };
+
+  editItem = (id) => {
+
+    this.onToggleImportant(id)
+  }
 
   onToggleImportant = (id) => {
     this.setState(({todoItem}) => ({
@@ -65,34 +66,6 @@ export default class App extends Component {
         todoItem: this.toggleProperty(todoItem, id, 'done')
       }));
   };
-
-  // newAllList = () => {
-  //   this.setState(({todoItem}) => {
-  //     return {
-  //       todo: todoItem
-  //     };
-  //   });
-  // };
-
-  // newActiveList = () => {
-  //   this.setState(({todoItem}) => {
-  //     const idx = todoItem.filter(el => !el.done);
-  //     console.log(idx)
-  //     return {
-  //       todo: idx
-  //     };
-  //    });
-  // };
-
-  // newCompletedList = () => {
-  //   this.setState(({todoItem}) => {
-  //     const idx = todoItem.filter(el => el.done);
-     
-  //     return {
-  //       todo: idx
-  //     };
-  //    });
-  // };
 
   onFilterChange = (filter) => {
     this.setState({filter});
@@ -115,12 +88,10 @@ export default class App extends Component {
   
     const idx = arr.findIndex(el => el.id === id);
     const oldItem = arr[idx];
-    console.log(idx)
     const newItem = {...oldItem, [propName]: !oldItem[propName]};
     
     return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
 };
-
 
   createTodoItem(label) {
     this.maxId += 1
@@ -136,13 +107,8 @@ export default class App extends Component {
   render() {
     const {todoItem, filter} = this.state;
     const visibleItems = this.filter(todoItem, filter);
-    // const {todo} = this.state;
+    
     const doneCount = todoItem.filter((el) => !el.done).length;
-    // const finallyTodo = (todo, todoItem) => {
-    //   if(todo == []) return todoItem
-    //   return todo
-    // }
-    // const importantCount = todoItem.length - doneCount;
 
     return (
       <div className='todoapp'>
@@ -151,6 +117,7 @@ export default class App extends Component {
                   oneDeleted={ this.deleteItem }
                   onToggleImportant={ this.onToggleImportant }
                   onToggleDone={ this.onToggleDone }
+                  editItem={this.editItem}
          />
         <Footer doneCount={ doneCount } 
                 allDelet={ this.allDelet } 
@@ -164,10 +131,3 @@ export default class App extends Component {
     );
   };
 };
-
-
-// Task - одна задача
-// TaskList - список задач
-// NewTaskForm - форма для добавления
-// Footer - футер с информацией и кнопками
-// TasksFilter - фильтры в футере
