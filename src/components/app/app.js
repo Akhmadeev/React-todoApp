@@ -50,22 +50,22 @@ export default class App extends Component {
     });
   };
 
-  editNameItem = (id) => {
+  // editNameItem = (id) => {
 
-    this.setState(({ todoItem }) => {
-      const idx = todoItem.findIndex(el => el.id === id)
+  //   this.setState(({ todoItem }) => {
+  //     const idx = todoItem.findIndex(el => el.id === id)
 
-      const oldItem = todoItem[idx];
-      const newItem = { ...oldItem, label: todoItem.label }
+  //     const oldItem = todoItem[idx];
+  //     const newItem = { ...oldItem, label: todoItem.label }
 
-      const newArr = [...todoItem.slice(0, idx), newItem, ...todoItem.slice(idx + 1)]
+  //     const newArr = [...todoItem.slice(0, idx), newItem, ...todoItem.slice(idx + 1)]
 
-      return {
-        todoItem: newArr
-      }
-    })
+  //     return {
+  //       todoItem: newArr
+  //     }
+  //   })
 
-  }
+  // }
 
   editItem = (id) => {
     this.setState(({todoItem}) => ({

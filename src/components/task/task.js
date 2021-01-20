@@ -7,16 +7,23 @@ const Task = ({ label, timeOut, oneDeleted, onToggleDone, done, editItem, import
     let className = 'todo-list-item';
     if(done) className += ' completed';
 
+    let textTask = '';
+
     const onSubmit = (event) => {
       event.preventDefault();
-      editItem(event.target.value)
+      editItem(event.target.value, textTask );
+    }
+
+    const editTask = (text) => {
+
+      textTask = text.target.value;
     }
 
     if(important) {
       return (
         <li>
           <form onSubmit={onSubmit}>
-            <input className="new-todo" placeholder={label} defaultValue={label}/>
+            <input className="new-todo" placeholder={label} defaultValue={label} onChange={editTask}/>
           </form>
         </li>
       )

@@ -16,7 +16,8 @@ const TaskList = ({todos, oneDeleted, onToggleImportant, onToggleDone, editItem 
       onToggleImportant={ () => onToggleImportant(item.id) }
       onToggleDone={ () => onToggleDone(item.id) }
       editItem={ () => {editItem(item.id, item.label)}}
-      done={ item.done } />
+      done={ item.done }
+      />
     ));
  
   return (
