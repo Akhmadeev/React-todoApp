@@ -50,9 +50,27 @@ export default class App extends Component {
     });
   };
 
-  editItem = (id) => {
+  editNameItem = (id) => {
 
-    this.onToggleImportant(id)
+    this.setState(({ todoItem }) => {
+      const idx = todoItem.findIndex(el => el.id === id)
+
+      const oldItem = todoItem[idx];
+      const newItem = { ...oldItem, label: todoItem.label }
+
+      const newArr = [...todoItem.slice(0, idx), newItem, ...todoItem.slice(idx + 1)]
+
+      return {
+        todoItem: newArr
+      }
+    })
+
+  }
+
+  editItem = (id) => {
+    this.setState(({todoItem}) => ({
+      todoItem: this.toggleProperty(todoItem, id, 'important')
+    }));
   }
 
   onToggleImportant = (id) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Task from '../task';
 
-const TaskList = ({todos, oneDeleted, onToggleImportant, onToggleDone, editItem}) => {
+const TaskList = ({todos, oneDeleted, onToggleImportant, onToggleDone, editItem }) => {
 
 
   // let todoItem;
@@ -15,7 +15,7 @@ const TaskList = ({todos, oneDeleted, onToggleImportant, onToggleDone, editItem}
       oneDeleted={ () => oneDeleted(item.id)}
       onToggleImportant={ () => onToggleImportant(item.id) }
       onToggleDone={ () => onToggleDone(item.id) }
-      editItem={ () => {editItem(item.id)}}
+      editItem={ () => {editItem(item.id, item.label)}}
       done={ item.done } />
     ));
  
@@ -44,7 +44,7 @@ TaskList.propTypes = {
   oneDeleted: PropTypes.func,
   onToggleImportant: PropTypes.func,
   onToggleDone: PropTypes.func,
-  editItem: PropTypes.func,
+  editItem: PropTypes.func
 };
 
 export default TaskList;
