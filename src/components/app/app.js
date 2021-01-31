@@ -5,6 +5,7 @@ import TaskList from '../task-list/task-list';
 import NewTaskForm from '../new-task-form/new-task-form';
 
 export default class App extends Component {
+  
   maxId = 1;
 
   state = {
@@ -90,7 +91,7 @@ export default class App extends Component {
 
   // }
 
-  editItem = (id, textTask) => {
+  editItem = (id) => {
     this.setState(({ todoItem }) => ({
       todoItem: this.toggleProperty(todoItem, id, 'important'),
     }));
