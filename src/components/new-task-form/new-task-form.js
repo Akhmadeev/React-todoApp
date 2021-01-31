@@ -16,8 +16,6 @@ export default class NewTaskForm extends Component {
     addItem: PropTypes.func,
   };
 
-  componentDidUpdate() {}
-
   onLabelChange = (event) => {
     this.setState({
       label: event.target.value,
@@ -41,20 +39,20 @@ export default class NewTaskForm extends Component {
     const { addItem } = this.props;
     event.preventDefault();
     if (label && minuts && seconds) addItem(label, minuts, seconds);
-    this.setState({
+    return this.setState({
       label: '',
-      minuts: null,
-      seconds: null,
+      minuts: '',
+      seconds: '',
     });
   };
 
   render() {
-    const { label } = this.state;
+    const { label, minuts, seconds } = this.state;
 
     return (
       <header className="header">
         <h1>todos</h1>
-        <form onSubmit={this.onSubmit} className="new-todo-form">
+        <form onSubmit={(event) => {this.onSubmit(event)}} className="new-todo-form">
           <input
             className="new-todo"
             required
@@ -71,6 +69,7 @@ export default class NewTaskForm extends Component {
             type="number"
             min={0}
             max={60}
+            value={minuts}
           />
           <input
             className="new-todo-form__timer"
@@ -80,6 +79,7 @@ export default class NewTaskForm extends Component {
             type="number"
             min={0}
             max={60}
+            value={seconds}
           />
         </form>
       </header>
