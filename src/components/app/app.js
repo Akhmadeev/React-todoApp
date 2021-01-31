@@ -91,7 +91,6 @@ export default class App extends Component {
   // }
 
   editItem = (id, textTask) => {
-    console.log(textTask);
     this.setState(({ todoItem }) => ({
       todoItem: this.toggleProperty(todoItem, id, 'important'),
     }));
