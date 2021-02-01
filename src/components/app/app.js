@@ -74,27 +74,25 @@ export default class App extends Component {
     });
   };
 
-  // editNameItem = (id) => {
+//   lolfunction = () => {
+// this.setState(({ todoItem }) => ({
+//   todoItem: this.toggleProperty(todoItem, id, 'important'),
+// }));
+//   }
 
-  //   this.setState(({ todoItem }) => {
-  //     const idx = todoItem.findIndex(el => el.id === id)
+  editItem = (id, text) => {
+    this.setState(({ todoItem }) => {
+      const idx = todoItem.findIndex((el) => el.id === id);
 
-  //     const oldItem = todoItem[idx];
-  //     const newItem = { ...oldItem, label: !!!поменять с input }
+      const oldItem = todoItem[idx];
+      const newItem = { ...oldItem, label: text[1], important: !oldItem.important };
 
-  //     const newArr = [...todoItem.slice(0, idx), newItem, ...todoItem.slice(idx + 1)]
+      const newArr = [...todoItem.slice(0, idx), newItem, ...todoItem.slice(idx + 1)];
 
-  //     return {
-  //       todoItem: newArr
-  //     }
-  //   })
-
-  // }
-
-  editItem = (id) => {
-    this.setState(({ todoItem }) => ({
-      todoItem: this.toggleProperty(todoItem, id, 'important'),
-    }));
+      return {
+        todoItem: newArr,
+      };
+    });
   };
 
   startTime = (id) => {

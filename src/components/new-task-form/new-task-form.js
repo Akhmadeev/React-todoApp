@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 export default class NewTaskForm extends Component {
   state = {
     label: '',
-    minuts: null,
-    seconds: null,
+    minuts: '',
+    seconds: '',
   };
 
   static defaultProps = {
@@ -52,7 +52,12 @@ export default class NewTaskForm extends Component {
     return (
       <header className="header">
         <h1>todos</h1>
-        <form onSubmit={(event) => {this.onSubmit(event)}} className="new-todo-form">
+        <form
+          onSubmit={(event) => {
+            this.onSubmit(event);
+          }}
+          className="new-todo-form"
+        >
           <input
             className="new-todo"
             required

@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import Task from '../task';
 
 const TaskList = ({ todos, oneDeleted, onToggleImportant, onToggleDone, editItem, startTime, endTime }) => {
-  // let todoItem;
-  // if(todos.length === 0) todoItem = todosItem;
-  // else todoItem = todos;
 
   const elements = todos.map((item) => (
     <Task
       label={item.label}
       timeOut={item.timeOut}
+      id={item.id}
       key={item.id}
       min={item.min}
       sec={item.sec}
@@ -18,8 +16,8 @@ const TaskList = ({ todos, oneDeleted, onToggleImportant, onToggleDone, editItem
       oneDeleted={() => oneDeleted(item.id)}
       onToggleImportant={() => onToggleImportant(item.id)}
       onToggleDone={() => onToggleDone(item.id)}
-      editItem={() => {
-        editItem(item.id, item.label);
+      editItem={(...text) => {
+        editItem(item.id, text);
       }}
       done={item.done}
       startTime={() => {
