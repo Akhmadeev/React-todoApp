@@ -21,7 +21,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix"
+    "lint:fix": "eslint ./src --fix",
+    "prettier": "prettier --write src/**/*.js"
   },
   "eslintConfig": {
     "extends": [
@@ -65,10 +66,10 @@
   "bugs": {
     "url": "https://github.com/Akhmadeev/React-todoApp/issues"
   },
-  "husky": {    
-    "hooks": {      
-      "pre-commit": "YOUR_COMMAND_HERE", 
-      "pre-push": "YOUR_COMMAND_HERE"   
-    }  
- }
+  "husky": {
+    "hooks": {
+      "pre-commit": "YOUR_COMMAND_HERE",
+      "pre-push": "YOUR_COMMAND_HERE"
+    }
+  }
 }

@@ -73,7 +73,7 @@ export default class NewTaskForm extends Component {
             onChange={this.onMinutsChange}
             type="number"
             min={0}
-            max={60}
+            max={59}
             value={minuts}
           />
           <input
@@ -83,7 +83,7 @@ export default class NewTaskForm extends Component {
             onChange={this.onSexondsChange}
             type="number"
             min={0}
-            max={60}
+            max={59}
             value={seconds}
           />
         </form>

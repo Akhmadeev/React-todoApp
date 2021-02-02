@@ -74,12 +74,6 @@ export default class App extends Component {
     });
   };
 
-//   lolfunction = () => {
-// this.setState(({ todoItem }) => ({
-//   todoItem: this.toggleProperty(todoItem, id, 'important'),
-// }));
-//   }
-
   editItem = (id, text) => {
     this.setState(({ todoItem }) => {
       const idx = todoItem.findIndex((el) => el.id === id);
